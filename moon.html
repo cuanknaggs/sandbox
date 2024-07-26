@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+    html, body, div { display: grid }
+
+html { height: 100% } /* full viewport height */
+
+body { background: #0e0014 }
+
+.retro-wave {
+	/* put disc in the midle along both axes */
+	place-self: center;
+	/* so we don't blend with body/ html (buggy) */
+	background: inherit;
+	/* clip out weird outline effect */
+	clip-path: circle(calc(50% - 1px)); /**/
+	
+	&::before, &::after {
+		/* stack pseudos one on top of the other */
+		grid-area: 1/ 1;
+		/* responsive, but don't let them get too big */
+		padding: min(35vmin, 15em);
+		/* turn square into disc */
+		/* unnecessary given clip-path, 
+		 * keep only one or the other *
+		border-radius: 50%; /**/
+		background: 
+			/* light top, dark bottom gradient */
+			linear-gradient(#b6b6b6, #000), 
+			/* repeating dark to light & back */
+			linear-gradient(#000, #999, #000) 
+				0/ 1% 10%;
+		/* blend the background layers */
+		/* we get repeating dark to light & back bands
+		 * but they go from lighter overall at the top
+		 * to darker overall at the bottom*/
+		background-blend-mode: screen;
+		/* blend with parent */
+		mix-blend-mode: screen;
+		content: ''
+	}
+	
+	/* push all pixels of lightness < 50% to black
+	 * and all others to white */
+	/* thicker black bands as we go down */
+	/* magic number, but oh, well, just CSS, no SVG */
+	&::before { filter: contrast(39) }
+	
+	&::after {
+		background: 
+			linear-gradient(135deg, 
+					#1f005c, #5b0060, #870160, #ac255e, 
+					#ca485c, #e16b5c, #f39060, #ffb56b);
+		mix-blend-mode: darken
+	}
+}
+    </style>
+  </head>
+  <body>
+    <div class='retro-wave'></div>
+  </body>
+</html>

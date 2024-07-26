@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      summary::marker {
+        font-size: 1.5em;
+        content: "+";
+      }
+      [open] summary::marker {
+        font-size: 1.5em;
+        content: "-";
+      }
+      summary:hover,
+      [open] summary {
+        cursor: pointer;
+        background: deeppink;
+        color: darkslategray;
+      }
+      dialog {
+        background: black;
+        color: magenta;
+        border: 1px solid magenta;
+      }
+      dialog::backdrop {
+        background: #fff5;
+        backdrop-filter: blur(4px);
+      }
+    </style>
+  </head>
+  <body>
+    <header><h1>test some things</h1></header>
+    <main>
+      <div>
+        <h2>native colour picker</h2>
+        <input type="color" placeholder="pick a color">
+      </div>
+      <hr />
+      <div>
+        <h2>input type list</h2>
+        <input list="frameworks" />
+
+        <datalist id="frameworks">
+          <option>Bootstrap</option>
+          <option>Tailwind CSS</option>
+          <option>Foundation</option>
+          <option>Bulma</option>
+          <option>Skeleton</option>
+        </datalist>
+      </div>
+      <hr />
+      <div>
+        <h2>accordion with details element</h2>
+        <details>
+          <summary>My accordion</summary>
+          <p>My accordion content</p>
+        </details>
+        <details>
+          <summary>My accordion</summary>
+          <p>My accordion content</p>
+        </details>
+        <hr />
+        <h2>exclusive accordion</h2>
+        <details name="details-group">
+          <summary>My accordion</summary>
+          <p>My accordion content</p>
+        </details>
+        <details name="details-group">
+          <summary>My accordion</summary>
+          <p>My accordion content</p>
+        </details>
+        <details name="details-group">
+          <summary>My accordion</summary>
+          <p>My accordion content</p>
+        </details>
+        <details name="details-group">
+          <summary>My accordion</summary>
+          <p>My accordion content</p>
+        </details>
+      </div>
+      <hr />
+      <div>
+        <h2>modal with dialog element</h2>
+        <button id="open-dialog1">Open dialog</button>
+        <p id="answer"></p>
+        <dialog>
+          <form method="dialog">
+            <p>Tabs or spaces?</p>
+            <input />
+            <button type="submit" value="wrong">Tabs</button>
+            <button type="submit" value="correct">Spaces</button>
+            <button type="submit" value="what are you? a monster">Tabs and Spaces</button>
+          </form>
+        </dialog>
+      </div>
+    </main>
+    <script>
+    const dialog = document.querySelector("dialog");
+    document.querySelector("button").addEventListener("click", () => {
+      dialog.showModal();
+    });
+    dialog.addEventListener("close", (e) => {
+      console.log(dialog)
+      document.querySelector('#answer').innerHTML = dialog.returnValue;
+    });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <link href="../shared/reset.css" rel="stylesheet" type="text/css" />
+    <title>My page title</title>
+</head>
+
+<body>
+    <form>
+        <label for="message-input">Send a message</label>
+        <input type="text" id="message-input" autofocus />
+        <button>Send Message</button>
+    </form>
+    <ul></ul>
+    <script>
+        const list = document.querySelector("ul");
+        const input = document.querySelector("input");
+        const button = document.querySelector("button");
+
+        let port2;
+
+        // Listen for the intial port transfer message
+        window.addEventListener("message", initPort);
+
+        button.addEventListener("click", clickText);
+
+        function clickText(e) {
+            e.preventDefault();
+            port2.postMessage('Click message received by IFrame: ' + input.value);
+        }
+
+        // Setup the transfered port
+        function initPort(e) {
+            port2 = e.ports[0];
+            port2.onmessage = onMessage;
+        }
+
+        // Handle messages received on port2
+        function onMessage(e) {
+            const listItem = document.createElement("li");
+            listItem.textContent = e.data;
+            list.appendChild(listItem);
+            port2.postMessage('Message received by IFrame: "' + e.data + '"');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  </head>
+  <body>
+    <main class="main">
+        <h1 class="heading">list of towns</h1>
+		<p class="output">Pass an array to an iframe, display as a list with a filter. Using alpinejs and Chota css.</p>
+		<iframe id="inlineFrameExample"
+			name="inlineFrameExample"
+		    title="Inline Frame Example"
+		    width="400"
+		    height="800"
+		    src="frame.html">
+		</iframe>
+    </main>
+	<script type="text/javascript">
+		const towns = [
+			"Alice",
+			"Butterworth",
+			"EastLondon",
+			"Graaff-Reinet",
+			"Grahamstown",
+			"KingWilliam’sTown",
+			"Mthatha",
+			"PortElizabeth",
+			"Queenstown",
+			"Uitenhage",
+			"Zwelitsha",
+			"Bethlehem",
+			"Bloemfontein",
+			"Jagersfontein",
+			"Kroonstad",
+			"Odendaalsrus",
+			"Parys",
+			"Phuthaditjhaba",
+			"Sasolburg",
+			"Virginia",
+			"Welkom",
+			"Benoni",
+			"Boksburg",
+			"Brakpan",
+			"Carletonville",
+			"Germiston",
+			"Johannesburg",
+			"Krugersdorp",
+			"Pretoria",
+			"Randburg",
+			"Randfontein",
+			"Roodepoort",
+			"Soweto",
+			"Springs",
+			"Vanderbijlpark",
+			"Vereeniging",
+			"Durban",
+			"Empangeni",
+			"Ladysmith",
+			"Newcastle",
+			"Pietermaritzburg",
+			"Pinetown",
+			"Ulundi",
+			"Umlazi",
+			"Giyani",
+			"Lebowakgomo",
+			"Musina",
+			"Phalaborwa",
+			"Polokwane",
+			"Seshego",
+			"Sibasa",
+			"Thabazimbi",
+			"Emalahleni",
+			"Nelspruit",
+			"Secunda",
+			"Klerksdorp",
+			"Mahikeng",
+			"Mmabatho",
+			"Potchefstroom",
+			"Rustenburg",
+			"Kimberley",
+			"Kuruman",
+			"PortNolloth",
+			"Bellville",
+			"CapeTown",
+			"Constantia",
+			"George",
+			"Hopefield",
+			"Oudtshoorn",
+			"Paarl",
+			"Simon’sTown",
+			"Stellenbosch",
+			"Swellendam",
+			"Worcester"
+		]
+
+
+		const channel = new MessageChannel();
+	    const iframe = document.querySelector('iframe');
+
+	    const onLoad = () => {
+	      iframe.contentWindow.postMessage(towns, '*', [channel.port2]);
+	    }
+	    iframe.addEventListener("load", onLoad);
+	</script>
+  </body>
+</html>
